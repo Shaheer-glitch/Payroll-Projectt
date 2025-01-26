@@ -38,3 +38,11 @@ int main() {
         cout << "6. Exit" << endl;
         cout << "Enter your choice: ";
         cin >> choice;
+        
+          // Validate user input
+        if (cin.fail()) {
+            cin.clear();
+            cin.ignore(10000, '\n');
+            cout << "Invalid input. Please enter a number between 1 and 6." << endl;
+            continue;
+        }
