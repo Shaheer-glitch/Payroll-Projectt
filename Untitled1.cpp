@@ -228,3 +228,49 @@ void searchEmployeeByID() {
 
     inFile.close();
 }
+
+// Function to delete an employee by ID
+void deleteEmployeeByID() {
+    ifstream inFile("employees.txt");
+    ofstream outFile("temp.txt");
+
+    if (!inFile || !outFile) {
+        cerr << "Error: Unable to open file." << endl;
+        return;
+    }
+
+    int deleteID;
+    cout << "Enter Employee ID to delete: ";
+    cin >> deleteID;
+
+    string line;
+    bool found = false;
+
+    while (getline(inFile, line)) {
+        stringstream ss(line);
+        string token;
+        getline(ss, token, ',');
+        stringstream tokenStream(token);
+        int id;
+        tokenStream >> id;
+
+        if (id == deleteID) {
+            found = true;
+            continue; // Skip this employee
+        }
+
+        outFile << line << endl;
+    }
+
+    inFile.close();
+    outFile.close();
+
+    remove("employees.txt");
+    rename("temp.txt", "employees.txt");
+
+    if (found) {
+        cout << "Employee with ID " << deleteID << " has been deleted." << endl;
+    } else {
+        cout << "Employee with ID " << deleteID << " not found." << endl;
+    }
+}
