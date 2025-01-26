@@ -16,3 +16,12 @@ struct Employee {
     float deduction;  // Text Deduction (e.g., tax, insurance, etc.)
     float bonus;      // Bonus
 };
+
+// Function prototypes
+void addEmployee();
+void viewEmployees();
+void searchEmployeeByID();
+void deleteEmployeeByID();
+void updateEmployeeByID();
+float calculateSalary(float hoursWorked, float hourlyRate, float deduction, float bonus);
+
