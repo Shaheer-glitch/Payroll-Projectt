@@ -1,0 +1,129 @@
+Payroll System Documentation
+
+Overview
+
+The Payroll System is a C++ program designed to manage employee records. It allows users to add, view, search, update, and delete employee data. The program calculates employee salaries based on their hours worked, hourly rate, deductions, and bonuses.
+
+Features
+
+Add Employee: Enter new employee details, including ID, name, hours worked, hourly rate, deductions, and bonuses.
+
+View Employees: Display a formatted list of all employee records.
+
+Search Employee by ID: Find and display employee details by their unique ID.
+
+Delete Employee by ID: Remove an employee's record from the system using their ID.
+
+Update Employee Details: Modify an existing employee's details.
+
+Exit: Terminate the program.
+
+File Handling
+
+Employee records are stored in a file named employees.txt. The program uses file I/O operations to read, write, and update data.
+
+Temporary files are used for updating and deleting records to ensure data integrity.
+
+Program Structure
+
+1. Main Function
+
+Displays a menu with options for different operations.
+
+Executes the selected option using a switch statement.
+
+Validates user input to ensure proper operation.
+
+2. Employee Structure
+
+Contains the following fields:
+
+id: Unique identifier for the employee.
+
+name: Employee's name.
+
+hoursWorked: Total hours worked by the employee.
+
+hourlyRate: Hourly payment rate.
+
+salary: Calculated salary.
+
+deduction: Amount deducted (e.g., taxes).
+
+bonus: Additional amount added to the salary.
+
+3. Functions
+
+a. addEmployee
+
+Prompts the user for employee details.
+
+Calculates the salary using the calculateSalary function.
+
+Appends the new employee record to employees.txt.
+
+b. viewEmployees
+
+Reads and displays all records from employees.txt in a formatted table.
+
+c. searchEmployeeByID
+
+Searches for an employee by ID in employees.txt.
+
+Displays the employee's details if found.
+
+d. deleteEmployeeByID
+
+Removes an employee's record by ID.
+
+Copies all records except the one to be deleted to a temporary file.
+
+Replaces the original file with the temporary file.
+
+e. updateEmployeeByID
+
+Updates the details of an employee by ID.
+
+Copies all records to a temporary file, replacing the updated record with new details.
+
+Replaces the original file with the temporary file.
+
+f. calculateSalary
+
+Calculates the salary using the formula:
+
+(hoursWorked * hourlyRate) - deduction + bonus
+
+Error Handling
+
+File operations are checked to ensure successful opening and closing.
+
+Input validation prevents invalid entries and ensures the program runs smoothly.
+
+Limitations
+
+No concurrency control for multiple users.
+
+Does not handle invalid or duplicate IDs efficiently.
+
+Assumes file integrity; no backups are created.
+
+Future Enhancements
+
+Add authentication for secure access.
+
+Implement a graphical user interface (GUI).
+
+Support for exporting data in different formats (e.g., CSV, JSON).
+
+Enhance error handling for edge cases.
+
+Usage
+
+Compile the program using a C++ compiler.
+
+Run the executable.
+
+Follow the menu prompts to manage employee records.
+
+This system is designed for small-scale payroll management and can be extended for more complex requirements.
