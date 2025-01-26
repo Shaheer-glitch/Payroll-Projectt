@@ -25,3 +25,16 @@ void deleteEmployeeByID();
 void updateEmployeeByID();
 float calculateSalary(float hoursWorked, float hourlyRate, float deduction, float bonus);
 
+int main() {
+    int choice;
+
+    do {
+        cout << "\n========== Payroll System ==========" << endl;
+        cout << "1. Add Employee" << endl;
+        cout << "2. View Employees" << endl;
+        cout << "3. Search Employee by ID" << endl;
+        cout << "4. Delete Employee by ID" << endl;
+        cout << "5. Update Employee Details" << endl;
+        cout << "6. Exit" << endl;
+        cout << "Enter your choice: ";
+        cin >> choice;
