@@ -46,3 +46,30 @@ int main() {
             cout << "Invalid input. Please enter a number between 1 and 6." << endl;
             continue;
         }
+        
+        switch (choice) {
+        case 1:
+            addEmployee();
+            break;
+        case 2:
+            viewEmployees();
+            break;
+        case 3:
+            searchEmployeeByID();
+            break;
+        case 4:
+            deleteEmployeeByID();
+            break;
+        case 5:
+            updateEmployeeByID();
+            break;
+        case 6:
+            cout << "Exiting the program. Goodbye!" << endl;
+            break;
+        default:
+            cout << "Invalid choice. Please try again." << endl;
+        }
+    } while (choice != 6);
+
+    return 0;
+}
