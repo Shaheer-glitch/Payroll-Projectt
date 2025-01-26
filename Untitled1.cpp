@@ -120,3 +120,68 @@ void addEmployee() {
     cout << "Employee added successfully!" << endl;
     outFile.close();
 }
+// Function to view all employees
+void viewEmployees() {
+    ifstream inFile;
+
+    // Open the file for reading
+    inFile.open("employees.txt");
+
+    // Check if file is opened successfully
+    if (!inFile) {
+        cerr << "Error: Unable to open file." << endl;
+        return;
+    }
+
+    Employee emp;
+    string line;
+
+    cout << "\n========== Employee Records ==========" << endl;
+    cout << left << setw(10) << "ID" << setw(20) << "Name" << setw(15) << "Hours Worked" << setw(15) << "Hourly Rate"
+         << setw(15) << "Deduction" << setw(15) << "Bonus" << setw(15) << "Salary" << endl;
+    cout << "-------------------------------------------------------------------------------" << endl;
+
+    while (getline(inFile, line)) {
+        size_t pos = 0;
+        string token;
+        int column = 0;
+
+        // Parse the line
+        while ((pos = line.find(',')) != string::npos) {
+            token = line.substr(0, pos);
+            line.erase(0, pos + 1);  // Erase the processed token from the line
+
+            stringstream ss(token);
+            switch (column) {
+            case 0:
+                ss >> emp.id; // Manually convert to integer using stringstream
+                break;
+            case 1:
+                emp.name = token;
+                break;
+            case 2:
+                ss >> emp.hoursWorked; // Manually convert to float using stringstream
+                break;
+            case 3:
+                ss >> emp.hourlyRate; // Manually convert to float using stringstream
+                break;
+            case 4:
+                ss >> emp.deduction; // Deduction
+                break;
+            case 5:
+                ss >> emp.bonus; // Bonus
+                break;
+            }
+            column++;
+        }
+
+        // The last part of the line is the salary
+        stringstream ss(line);
+        ss >> emp.salary; // Convert the remaining line to salary
+
+        cout << left << setw(10) << emp.id << setw(20) << emp.name << setw(15) << emp.hoursWorked << "$"<< setw(15) << emp.hourlyRate
+             << "$"<< setw(15) << emp.deduction << "$"<< setw(15) << emp.bonus << "$"<< setw(15) << emp.salary << endl;
+    }
+
+    inFile.close();
+}
