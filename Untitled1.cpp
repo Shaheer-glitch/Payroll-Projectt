@@ -185,3 +185,46 @@ void viewEmployees() {
 
     inFile.close();
 }
+
+// Function to search for an employee by ID
+void searchEmployeeByID() {
+    ifstream inFile("employees.txt");
+
+    if (!inFile) {
+        cerr << "Error: Unable to open file." << endl;
+        return;
+    }
+
+    int searchID;
+    cout << "Enter Employee ID to search: ";
+    cin >> searchID;
+
+    Employee emp;
+    string line;
+    bool found = false;
+
+    while (getline(inFile, line)) {
+        stringstream ss(line);
+        string token;
+        getline(ss, token, ',');
+        stringstream tokenStream(token);
+        tokenStream >> emp.id;
+
+        if (emp.id == searchID) {
+            getline(ss, emp.name, ',');
+            ss >> emp.hoursWorked >> emp.hourlyRate >> emp.deduction >> emp.bonus >> emp.salary;
+            cout << "\nEmployee Found:" << endl;
+            cout << "ID: " << emp.id << ", Name: " << emp.name << ", Hours Worked: " << emp.hoursWorked
+                 << ", Hourly Rate: " << emp.hourlyRate << ", Deduction: " << emp.deduction 
+                 << ", Bonus: " << emp.bonus << ", Salary: " << emp.salary << endl;
+            found = true;
+            break;
+        }
+    }
+
+    if (!found) {
+        cout << "Employee with ID " << searchID << " not found." << endl;
+    }
+
+    inFile.close();
+}
