@@ -274,3 +274,70 @@ void deleteEmployeeByID() {
         cout << "Employee with ID " << deleteID << " not found." << endl;
     }
 }
+// Function to update an employee by ID
+void updateEmployeeByID() {
+    ifstream inFile("employees.txt");
+    ofstream outFile("temp.txt");
+
+    if (!inFile || !outFile) {
+        cerr << "Error: Unable to open file." << endl;
+        return;
+    }
+
+    int updateID;
+    cout << "Enter Employee ID to update: ";
+    cin >> updateID;
+
+    string line;
+    bool found = false;
+
+    while (getline(inFile, line)) {
+        stringstream ss(line);
+        string token;
+        getline(ss, token, ',');
+        stringstream tokenStream(token);
+        int id;
+        tokenStream >> id;
+
+        if (id == updateID) {
+            found = true;
+            Employee emp;
+            emp.id = id;
+
+            cin.ignore(); // Clear the buffer
+            cout << "Enter New Name: ";
+            getline(cin, emp.name);
+
+            cout << "Enter New Hours Worked: ";
+            cin >> emp.hoursWorked;
+
+            cout << "Enter New Hourly Rate: ";
+            cin >> emp.hourlyRate;
+
+            cout << "Enter New Deduction: ";
+            cin >> emp.deduction;
+
+            cout << "Enter New Bonus: ";
+            cin >> emp.bonus;
+
+            emp.salary = calculateSalary(emp.hoursWorked, emp.hourlyRate, emp.deduction, emp.bonus);
+
+            outFile << emp.id << "," << emp.name << "," << emp.hoursWorked << "," << emp.hourlyRate << ","
+                    << emp.deduction << "," << emp.bonus << "," << emp.salary << endl;
+        } else {
+            outFile << line << endl;
+        }
+    }
+
+    inFile.close();
+    outFile.close();
+
+    remove("employees.txt");
+    rename("temp.txt", "employees.txt");
+
+    if (found) {
+        cout << "Employee with ID " << updateID << " has been updated." << endl;
+    } else {
+        cout << "Employee with ID " << updateID << " not found." << endl;
+    }
+}
