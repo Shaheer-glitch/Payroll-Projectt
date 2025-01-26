@@ -77,3 +77,46 @@ int main() {
 // Function to calculate salary with deductions and bonus
 float calculateSalary(float hoursWorked, float hourlyRate, float deduction, float bonus) {
     return (hoursWorked * hourlyRate) - deduction + bonus;
+    
+    // Function to add an employee
+void addEmployee() {
+    ofstream outFile;
+
+    // Open the file for appending
+    outFile.open("employees.txt", ios::app);
+
+    // Check if file is opened successfully
+    if (!outFile) {
+        cerr << "Error: Unable to open file." << endl;
+        return;
+    }
+
+    Employee emp;
+    cout << "\nEnter Employee ID: ";
+    cin >> emp.id;
+
+    cin.ignore(); // Clear the buffer
+    cout << "Enter Employee Name: ";
+    getline(cin, emp.name);
+
+    cout << "Enter Hours Worked: ";
+    cin >> emp.hoursWorked;
+
+    cout << "Enter Hourly Rate: $ ";
+    cin >> emp.hourlyRate;
+
+    cout << "Enter Deduction (e.g., tax or insurance): $ ";
+    cin >> emp.deduction;
+
+    cout << "Enter Bonus: $ ";
+    cin >> emp.bonus;
+
+    emp.salary = calculateSalary(emp.hoursWorked, emp.hourlyRate, emp.deduction, emp.bonus);
+
+    // Write to file
+    outFile << emp.id << "," << emp.name << "," << emp.hoursWorked << "," << emp.hourlyRate << "," 
+            << emp.deduction << "," << emp.bonus << "," << emp.salary << endl;
+
+    cout << "Employee added successfully!" << endl;
+    outFile.close();
+}
