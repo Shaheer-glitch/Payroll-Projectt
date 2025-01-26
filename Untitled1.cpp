@@ -73,3 +73,7 @@ int main() {
 
     return 0;
 }
+
+// Function to calculate salary with deductions and bonus
+float calculateSalary(float hoursWorked, float hourlyRate, float deduction, float bonus) {
+    return (hoursWorked * hourlyRate) - deduction + bonus;
